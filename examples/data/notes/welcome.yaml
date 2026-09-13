@@ -1,0 +1,12 @@
+# YamlDB preserves this comment and the formatting below.
+schema_version: 1
+kind: note
+id: welcome
+title: Welcome to YamlDB
+body: |
+  Store readable YAML documents in named collections.
+  Fetch their original bytes through a small HTTP API.
+tags:
+  - example
+metadata:
+  audience: developers
