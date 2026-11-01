@@ -1,0 +1,288 @@
+{
+  "schema": "yamora-conformance/1",
+  "profile": "binary-document-standalone",
+  "fixtures": {
+    "value-one": {
+      "length": 9,
+      "etag": "\"3efa98be46c7b7d1\""
+    },
+    "value-two": {
+      "length": 9,
+      "etag": "\"3ef056be46bef326\""
+    },
+    "decorated": {
+      "length": 43,
+      "etag": "\"a054e928f838459e\""
+    },
+    "fragmented": {
+      "length": 69308,
+      "etag": "\"f1b01f4c9bcda47c\""
+    }
+  },
+  "cases": [
+    {
+      "id": "direct-native",
+      "method": "GET",
+      "source": "decorated",
+      "seed": "decorated",
+      "condition": "none",
+      "credential": "read",
+      "expected_status": 200,
+      "fault": "none",
+      "cancel_mode": "none",
+      "direct": true
+    },
+    {
+      "id": "source-exact",
+      "method": "GET",
+      "source": "decorated",
+      "seed": "decorated",
+      "condition": "none",
+      "credential": "read",
+      "expected_status": 200,
+      "fault": "none",
+      "cancel_mode": "none",
+      "direct": false
+    },
+    {
+      "id": "create",
+      "method": "PUT",
+      "source": "value-one",
+      "seed": null,
+      "condition": "create",
+      "credential": "write",
+      "expected_status": 201,
+      "fault": "none",
+      "cancel_mode": "none",
+      "direct": false
+    },
+    {
+      "id": "create-conflict",
+      "method": "PUT",
+      "source": "value-one",
+      "seed": "value-two",
+      "condition": "create",
+      "credential": "write",
+      "expected_status": 412,
+      "fault": "none",
+      "cancel_mode": "none",
+      "direct": false
+    },
+    {
+      "id": "replace",
+      "method": "PUT",
+      "source": "value-one",
+      "seed": "value-two",
+      "condition": "match",
+      "credential": "write",
+      "expected_status": 200,
+      "fault": "none",
+      "cancel_mode": "none",
+      "direct": false
+    },
+    {
+      "id": "stale-put",
+      "method": "PUT",
+      "source": "value-one",
+      "seed": "value-two",
+      "condition": "stale",
+      "credential": "write",
+      "expected_status": 412,
+      "fault": "none",
+      "cancel_mode": "none",
+      "direct": false
+    },
+    {
+      "id": "head",
+      "method": "HEAD",
+      "source": "decorated",
+      "seed": "decorated",
+      "condition": "none",
+      "credential": "read",
+      "expected_status": 200,
+      "fault": "none",
+      "cancel_mode": "none",
+      "direct": false
+    },
+    {
+      "id": "stale-delete",
+      "method": "DELETE",
+      "source": "value-one",
+      "seed": "value-one",
+      "condition": "stale",
+      "credential": "write",
+      "expected_status": 412,
+      "fault": "none",
+      "cancel_mode": "none",
+      "direct": false
+    },
+    {
+      "id": "delete",
+      "method": "DELETE",
+      "source": "value-one",
+      "seed": "value-one",
+      "condition": "match",
+      "credential": "write",
+      "expected_status": 204,
+      "fault": "none",
+      "cancel_mode": "none",
+      "direct": false
+    },
+    {
+      "id": "missing",
+      "method": "GET",
+      "source": "value-one",
+      "seed": null,
+      "condition": "none",
+      "credential": "read",
+      "expected_status": 404,
+      "fault": "none",
+      "cancel_mode": "none",
+      "direct": false
+    },
+    {
+      "id": "fragmentation",
+      "method": "PUT",
+      "source": "fragmented",
+      "seed": null,
+      "condition": "create",
+      "credential": "write",
+      "expected_status": 201,
+      "fault": "none",
+      "cancel_mode": "none",
+      "direct": false
+    },
+    {
+      "id": "missing-bearer",
+      "method": "GET",
+      "source": "value-one",
+      "seed": null,
+      "condition": "none",
+      "credential": "missing",
+      "expected_status": 401,
+      "fault": "none",
+      "cancel_mode": "none",
+      "direct": false
+    },
+    {
+      "id": "wrong-bearer",
+      "method": "GET",
+      "source": "value-one",
+      "seed": null,
+      "condition": "none",
+      "credential": "wrong",
+      "expected_status": 401,
+      "fault": "none",
+      "cancel_mode": "none",
+      "direct": false
+    },
+    {
+      "id": "read-bearer-write",
+      "method": "PUT",
+      "source": "value-one",
+      "seed": null,
+      "condition": "none",
+      "credential": "read",
+      "expected_status": 401,
+      "fault": "none",
+      "cancel_mode": "none",
+      "direct": false
+    },
+    {
+      "id": "scoped-denied",
+      "method": "PUT",
+      "source": "value-one",
+      "seed": null,
+      "condition": "none",
+      "credential": "scoped",
+      "expected_status": 403,
+      "fault": "none",
+      "cancel_mode": "none",
+      "direct": false
+    },
+    {
+      "id": "precancel",
+      "method": "PUT",
+      "source": "value-one",
+      "seed": null,
+      "condition": "none",
+      "credential": "write",
+      "expected_status": 201,
+      "fault": "none",
+      "cancel_mode": "pre",
+      "direct": false
+    },
+    {
+      "id": "read-deadline",
+      "method": "GET",
+      "source": "value-one",
+      "seed": "value-one",
+      "condition": "none",
+      "credential": "read",
+      "expected_status": 200,
+      "fault": "hold",
+      "cancel_mode": "none",
+      "direct": false
+    },
+    {
+      "id": "committed-partial",
+      "method": "PUT",
+      "source": "value-one",
+      "seed": null,
+      "condition": "create",
+      "credential": "write",
+      "expected_status": 201,
+      "fault": "partial",
+      "cancel_mode": "none",
+      "direct": false
+    },
+    {
+      "id": "committed-no-end",
+      "method": "PUT",
+      "source": "value-one",
+      "seed": null,
+      "condition": "create",
+      "credential": "write",
+      "expected_status": 201,
+      "fault": "no-end",
+      "cancel_mode": "none",
+      "direct": false
+    },
+    {
+      "id": "committed-deadline",
+      "method": "PUT",
+      "source": "value-one",
+      "seed": null,
+      "condition": "create",
+      "credential": "write",
+      "expected_status": 201,
+      "fault": "hold",
+      "cancel_mode": "none",
+      "direct": false
+    },
+    {
+      "id": "committed-cancel",
+      "method": "PUT",
+      "source": "value-one",
+      "seed": null,
+      "condition": "create",
+      "credential": "write",
+      "expected_status": 201,
+      "fault": "hold",
+      "cancel_mode": "external",
+      "direct": false
+    },
+    {
+      "id": "committed-wrong-id",
+      "method": "PUT",
+      "source": "value-one",
+      "seed": null,
+      "condition": "create",
+      "credential": "write",
+      "expected_status": 201,
+      "fault": "wrong-id",
+      "cancel_mode": "none",
+      "direct": false
+    }
+  ]
+}

@@ -1,5 +1,0 @@
-include Makefile PROTOCOL.md LICENSE
-recursive-include src *.c *.h
-recursive-include tests *.py
-recursive-include examples *.yaml
-recursive-include yamldb/schemas *.yaml

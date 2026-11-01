@@ -1,0 +1,13 @@
+{
+  "name": "@yamora/node",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "description": "Standard-library HTTP/TLS foundation for YamoraDB",
+  "type": "module",
+  "engines": { "node": ">=22.23.1" },
+  "exports": { ".": { "types": "./index.d.ts", "import": "./index.js" } },
+  "types": "./index.d.ts",
+  "files": ["index.js", "index.d.ts", "lib", "README.md", "LICENSE", "examples"],
+  "scripts": { "test": "node --test tests/*.test.js" }
+}

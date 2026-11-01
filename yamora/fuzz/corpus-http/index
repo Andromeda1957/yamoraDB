@@ -1,0 +1,2 @@
+ESCAPED
+PUT /v1/indexes HTTP/1.1\r\nHost: localhost\r\nAuthorization: Bearer 0123456789abcdef0123456789abcdef\r\nContent-Type: application/json\r\nContent-Length: 73\r\n\r\n{"indexes":[{"collection":"notes","name":"by-value","fields":["value"]}]}

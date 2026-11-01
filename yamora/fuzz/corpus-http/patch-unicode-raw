@@ -1,0 +1,2 @@
+ESCAPED
+PATCH /v1/collections/notes/documents/seed HTTP/1.1\r\nHost: localhost\r\nAuthorization: Bearer 0123456789abcdef0123456789abcdef\r\nContent-Type: application/json\r\nContent-Length: 35\r\n\r\n{"$set":{"value":"left \xe2\x80\xa8 right"}}

@@ -1,0 +1,10 @@
+name: Green tea
+sku: tea-green
+price: 12.5
+stock: 20
+tags: [tea, drinks]
+variants:
+  - size: small
+    stock: 8
+  - size: large
+    stock: 12

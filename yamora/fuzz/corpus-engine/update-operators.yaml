@@ -1,0 +1,14 @@
+patch:
+  $addToSet: {tags: {$each: [green, red, green]}}
+  $min: {profile.level: 0}
+  $max: {rating: 2000}
+  $mul: {profile.score: 2}
+  $rename: {note: remark}
+  $setOnInsert: {created: true}
+upsert:
+  filter: {name: Delta, $and: [{profile.level: {$eq: 4}}], rating: {$gt: 1}}
+  update:
+    $set: {active: true}
+    $inc: {visits: 1}
+    $push: {tags: {$each: [blue]}}
+    $setOnInsert: {created: true}

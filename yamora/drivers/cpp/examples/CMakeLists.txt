@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.16)
+project(yamora_cpp_example LANGUAGES CXX)
+find_package(yamora_cpp 0.1.0 EXACT CONFIG REQUIRED)
+add_executable(yamora_crud crud.cpp)
+target_link_libraries(yamora_crud PRIVATE yamora::cpp)

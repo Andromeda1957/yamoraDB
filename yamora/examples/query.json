@@ -1,0 +1,7 @@
+{
+  "filter": {"active": true, "profile.age": {"$gte": 18}},
+  "sort": {"profile.age": "asc"},
+  "projection": ["name", "profile.city", "orders"],
+  "limit": 10,
+  "explain": true
+}

@@ -1,0 +1,3 @@
+# Raw source fixtures are protocol inputs, including authored line endings.
+*.yaml -text
+decorated.yaml whitespace=cr-at-eol

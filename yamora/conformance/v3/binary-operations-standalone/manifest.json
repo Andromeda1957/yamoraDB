@@ -1,0 +1,11 @@
+{
+  "schema": "yamora-conformance/3",
+  "profile": "binary-operations-standalone",
+  "cases": [
+    "query", "pagination", "stale-page", "aggregate", "search", "patch",
+    "stale-patch", "transaction", "transaction-reject", "changes", "feed",
+    "feed-interrupted", "missing-bearer", "read-bearer-write", "scoped-transaction",
+    "scoped-lookup", "precancel", "read-deadline", "mutation-no-end",
+    "mutation-wrong-id", "mutation-deadline", "mutation-cancel"
+  ]
+}

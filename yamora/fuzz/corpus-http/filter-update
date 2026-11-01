@@ -1,0 +1,2 @@
+ESCAPED
+POST /v1/transactions HTTP/1.1\r\nHost: localhost\r\nAuthorization: Bearer 0123456789abcdef0123456789abcdef\r\nContent-Type: application/json\r\nContent-Length: 260\r\n\r\n{"operations":[{"collection":"notes","filter":{"value":{"$regex":"^t"}},"update":{"$set":{"value":"filtered"}},"multi":true},{"collection":"notes","filter":{"value":"absent"},"update":{"$setOnInsert":{"value":"inserted"}},"upsert":true,"document":"upserted"}]}

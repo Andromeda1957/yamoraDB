@@ -1,0 +1,20 @@
+{
+  "name": "yamora/driver",
+  "version": "0.1.0",
+  "description": "Source-preserving Yamora HTTP, replica-set and binary TLS clients",
+  "type": "library",
+  "license": "MIT",
+  "require": {
+    "php": ">=8.2",
+    "php-64bit": ">=8.2",
+    "ext-json": "*",
+    "ext-filter": "*",
+    "ext-pcre": "*",
+    "ext-openssl": "*",
+    "ext-posix": "*"
+  },
+  "autoload": { "classmap": ["src/"] },
+  "archive": {
+    "exclude": ["/tests", "/conformance", "/vendor", "/composer.lock"]
+  }
+}

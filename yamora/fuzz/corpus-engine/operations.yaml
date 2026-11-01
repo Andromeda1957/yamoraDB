@@ -1,0 +1,12 @@
+query:
+  filter: {items: {$elemMatch: {value: {$gte: 1}}}}
+  count_only: true
+indexes:
+  - {collection: samples, name: by-rating, fields: [rating]}
+  - {collection: samples, name: unique-name, fields: [name], unique: true}
+patch:
+  $set: {profile.level: 3}
+  $inc: {rating: 1}
+  $push: {tags: green}
+  $pull: {tags: red}
+  $unset: {note: true}

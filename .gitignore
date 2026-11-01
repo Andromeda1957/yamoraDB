@@ -1,8 +1,10 @@
-/build/
-/dist/
-/.venv/
+build/
+dist/
+.venv/
 *.egg-info/
 __pycache__/
 *.py[cod]
 .env
 *.token
+node_modules/
+target/

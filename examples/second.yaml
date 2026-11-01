@@ -1,6 +1,0 @@
-schema_version: 1
-kind: note
-id: second
-title: Another note
-body: |
-  A sample document for importing into the notes collection.

@@ -1,0 +1,2 @@
+ESCAPED
+PUT /v1/collections/notes/documents/seed HTTP/1.1\r\nHost: localhost\r\nAuthorization: Bearer 0123456789abcdef0123456789abcdef\r\nContent-Type: application/yaml\r\nContent-Length: 0\r\n\r\n

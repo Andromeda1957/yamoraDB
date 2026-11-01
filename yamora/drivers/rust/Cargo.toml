@@ -1,0 +1,30 @@
+[package]
+name = "yamora"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+description = "Bounded synchronous YamoraDB HTTP/TLS replica-set driver using system OpenSSL"
+license = "MIT"
+readme = "README.md"
+publish = false
+include = ["Cargo.toml", "Cargo.lock", "LICENSE", "README.md", "src/**", "examples/**", "tests/**"]
+
+[dependencies]
+
+[workspace]
+
+[[test]]
+name = "cluster"
+path = "tests/cluster.rs"
+
+[[test]]
+name = "cluster_native"
+path = "tests/cluster_native.rs"
+
+[[test]]
+name = "binary"
+path = "tests/binary.rs"
+
+[[test]]
+name = "binary_admission"
+path = "tests/binary_admission.rs"

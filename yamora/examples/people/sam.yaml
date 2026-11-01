@@ -1,0 +1,7 @@
+name: Sam
+active: true
+profile:
+  city: Austin
+  age: 28
+orders: 1
+interests: [books, tea]

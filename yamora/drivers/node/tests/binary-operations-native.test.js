@@ -1,0 +1,31 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { native, READ, WRITE } from './binary-helpers.js';
+
+test('native schema2 raw queries, PATCH, transaction source and finite feed completion', async t => {
+  const fixture = await native(t, { mtls: true }), c = fixture.client;
+  const raw = Buffer.from('# spelling\r\nn: 9223372036854775807\r\ntext: hello\r\n');
+  await c.put('ops', 'one', raw, { token: WRITE });
+  await c.put('ops', 'two', Buffer.from('n: 2\ntext: two\n'), { token: WRITE });
+  const first = await c.operation('POST', '/v1/query/ops', 'application/json', Buffer.from('{"limit":1}'), { token: READ });
+  assert.ok(first.body.includes(Buffer.from('9223372036854775807')));
+  const page = JSON.parse(first.body);
+  const next = await c.operation('POST', '/v1/query/ops', 'application/json', Buffer.from(JSON.stringify({ limit: 1, after: page.next_after, revision: page.revision })), { token: READ });
+  assert.notDeepEqual(JSON.parse(next.body).documents, page.documents);
+  const patch = await c.operation('PATCH', '/v1/collections/ops/documents/two', 'application/json', Buffer.from('{"$inc":{"n":1}}'), { token: WRITE });
+  assert.equal(JSON.parse(patch.body).revision, patch.revision);
+  const source = '# transaction spelling\r\nn: 4\r\n';
+  const tx = await c.operation('POST', '/v1/transactions', 'application/json', Buffer.from(JSON.stringify({ operations: [{ collection: 'ops', document: 'three', put: source }] })), { token: WRITE });
+  assert.equal(JSON.parse(tx.body).operations, 1);
+  assert.deepEqual((await c.get('ops', 'three', { token: READ })).source, Buffer.from(source));
+  const after = (await fixture.http.changes()).next_after;
+  const completed = [];
+  const result = await c.feed(`/v1/changes/stream?after=${after}&duration_ms=150&heartbeat_ms=100`, page => completed.push(page), { token: READ });
+  assert.ok(completed.length >= 1); assert.equal(result.resumeAfter, after);
+  for (const raw of completed) assert.equal(JSON.parse(raw).next_after, after);
+  const cancelled = new AbortController(), prefix = [];
+  await assert.rejects(c.feed(`/v1/changes/stream?after=${after}`, page => { prefix.push(page); cancelled.abort(); }, { token: READ, signal: cancelled.signal }), error => error.code === 'ABORT_ERR' && !error.uncertain);
+  assert.equal(prefix.length, 1);
+  await assert.rejects(c.operation('PATCH', '/v1/collections/ops/documents/two', 'application/json', Buffer.from('{"$inc":{"n":1}}'), { token: READ }), error => error.status === 401 && !error.uncertain);
+  assert.ok((await c.get('ops', 'two', { token: READ })).source.includes(Buffer.from('n: 3')));
+});

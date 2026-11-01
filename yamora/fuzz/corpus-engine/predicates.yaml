@@ -1,0 +1,11 @@
+query:
+  filter:
+    items.value: {$gte: 1, $type: [int, float]}
+    tags: {$all: [red, {$elemMatch: {$eq: red}}], $size: 2}
+    name: {$regex: "^(al|be)[[:alpha:]]+\\b", $options: imsx}
+    note: {$not: {$regex: "(a+)+$"}}
+  projection: [name, items.0.value]
+  explain: true
+indexes:
+  - {collection: samples, name: by-item-value, fields: [items.value]}
+  - {collection: samples, name: by-score-tags, fields: [profile.score, tags]}

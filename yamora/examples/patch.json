@@ -1,0 +1,5 @@
+{
+  "$set": {"profile.city": "Austin"},
+  "$inc": {"orders": 1},
+  "$push": {"interests": "tea"}
+}

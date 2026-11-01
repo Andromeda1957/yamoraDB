@@ -1,0 +1,5 @@
+filter: {rating: {$gte: 1000}, tags: blue}
+projection: [name, profile.score]
+sort: {rating: descending}
+limit: 2
+explain: true

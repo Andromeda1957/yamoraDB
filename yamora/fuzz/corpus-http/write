@@ -1,0 +1,2 @@
+ESCAPED
+PUT /v1/collections/notes/documents/fuzz HTTP/1.1\r\nHost: localhost\r\nAuthorization: Bearer 0123456789abcdef0123456789abcdef\r\nContent-Type: application/yaml\r\nContent-Length: 12\r\nIf-None-Match: *\r\n\r\nvalue: fuzz\n

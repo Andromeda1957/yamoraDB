@@ -1,0 +1,8 @@
+# Keep this note beside the editable source document.
+name: Alex
+active: true
+profile:
+  city: Chicago # Home city
+  age: 32
+orders: 3
+interests: [books, cycling]

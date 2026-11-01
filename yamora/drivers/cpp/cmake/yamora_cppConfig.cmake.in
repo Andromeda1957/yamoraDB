@@ -1,0 +1,7 @@
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+find_dependency(OpenSSL 1.1.1)
+find_dependency(Threads)
+include("${CMAKE_CURRENT_LIST_DIR}/yamora_cppTargets.cmake")
+check_required_components(yamora_cpp)

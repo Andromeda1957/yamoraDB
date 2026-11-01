@@ -1,0 +1,2119 @@
+{
+  "schema": "yamora-comparative-benchmark/1",
+  "label": "smoke, overloaded host, not a benchmark result",
+  "profile": "smoke",
+  "created_at": "2026-10-31T20:11:32+00:00",
+  "duration_seconds": 76.351,
+  "command": [
+    ".venv/bin/python",
+    "-m",
+    "yamora.benchmarks.compare",
+    "run",
+    "--profile",
+    "smoke",
+    "--label",
+    "smoke, overloaded host, not a benchmark result",
+    "--output",
+    "yamora/benchmarks/compare/examples/smoke-overloaded-host-not-a-benchmark.json"
+  ],
+  "source": {
+    "commit": "0d078f0f9a2d6ce72a4ecd3194a432425b748b80",
+    "yamora_tree_dirty": false,
+    "yamora_dirty_paths": []
+  },
+  "machine": {
+    "kernel": "7.2.8-9-omarchy",
+    "architecture": "x86_64",
+    "os": "Omarchy",
+    "cpu_model": "11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz",
+    "logical_cpus": 8,
+    "cpu_frequency_governor": "powersave",
+    "memory_total_bytes": 16460599296,
+    "memory_available_bytes_at_start": 6857355264,
+    "load_average_at_start": [
+      2.4296875,
+      3.166015625,
+      4.6357421875
+    ],
+    "python": "3.12.13",
+    "filesystem": {
+      "type": "btrfs",
+      "source": "/dev/mapper/root",
+      "mount_point": "/home",
+      "mount_options": "rw,relatime",
+      "superblock_options": "rw,compress=zstd:3,ssd,space_cache=v2,subvolid=257,subvol=/@home",
+      "block_size": 4096,
+      "free_bytes_at_start": 225582997504
+    },
+    "load_average_at_end": [
+      6.044921875,
+      4.0400390625,
+      4.822265625
+    ]
+  },
+  "podman": {
+    "version": "6.1.4",
+    "network": "one private bridge network per run; each engine is published only on an ephemeral 127.0.0.1 port"
+  },
+  "dataset": {
+    "version": 1,
+    "seed": 20261031,
+    "documents": 2000,
+    "sha256": "02d7ab5fbc5782d6b2f1132fd2cf821a5bf52b561965ebe3ce9b7dd5d3d23319",
+    "mean_yaml_bytes": 505.4,
+    "mean_json_bytes": 451.4,
+    "total_yaml_bytes": 1010832,
+    "total_json_bytes": 902832,
+    "shape": {
+      "id": "document ID, 'doc-' plus 8 zero-padded digits; Yamora path name, MongoDB _id, PostgreSQL primary key column",
+      "category": "string, one of 32 values c00..c31 (indexed)",
+      "price": "integer cents, uniform in [0, 100000) (indexed)",
+      "rating": "float with two decimals, 1.00..5.00",
+      "active": "boolean, true for about 70%",
+      "stock": "integer 0..999 (target of single-document $inc updates)",
+      "tags": "array of 3 distinct strings from t000..t255",
+      "created": "ISO-8601 UTC timestamp string in 2026",
+      "attributes": "map of color (string), size (string) and weight_g (integer)",
+      "description": "32-56 lowercase ASCII words drawn uniformly from a 1024-word vocabulary (text indexed)",
+      "yaml_comment": "Yamora's YAML source starts with one comment line; MongoDB and PostgreSQL receive the same values as JSON without it"
+    }
+  },
+  "settings": {
+    "name": "smoke",
+    "documents": 2000,
+    "batch_size": 100,
+    "repetitions": 1,
+    "concurrency": [
+      1,
+      2
+    ],
+    "operations": {
+      "point_read": 300,
+      "query_eq": 100,
+      "query_range": 100,
+      "text": 100,
+      "aggregate": 5,
+      "update": 200,
+      "mixed": 300
+    },
+    "warmup_fraction": 0.1,
+    "warmup_minimum": 10,
+    "limits": {
+      "cpus": "2",
+      "memory": "1g",
+      "memory_swap": "1g"
+    },
+    "cache_bytes_target": 268435456,
+    "engines": [
+      "yamora",
+      "mongodb",
+      "postgresql"
+    ],
+    "engine_order": "rotated by one position per repetition",
+    "query_limit": 20,
+    "range_width": 500,
+    "mixed_read_percent": 80,
+    "timing": "monotonic clock per request inside each client process; phase throughput is requests over the span from the first worker's start to the last worker's end; ingest and delete use the summed time inside their batch calls",
+    "percentiles": "linear interpolation between closest ranks (type 7)"
+  },
+  "engines": {
+    "yamora": {
+      "product": "YamoraDB",
+      "version": "0.3.0 (Python package version; daemon from this checkout)",
+      "build": {
+        "binary": "<scratch>/build/yamora",
+        "source": "built from this checkout with the Makefile defaults",
+        "sha256": "48b88073fa64a2e6f66fbdcf82c28783f4c86f87e7ac598052867d24f06939bf",
+        "bytes": 1418896,
+        "compiler": "clang version 23.1.3",
+        "make_command": "make -C yamora BUILD_DIR=<scratch>/build <scratch>/build/yamora",
+        "libraries": [
+          "/lib64/ld-linux-x86-64.so.2",
+          "/usr/lib/libbrotlicommon.so.1",
+          "/usr/lib/libbrotlidec.so.1",
+          "/usr/lib/libbrotlienc.so.1",
+          "/usr/lib/libc.so.6",
+          "/usr/lib/libcrypto.so.3",
+          "/usr/lib/libm.so.6",
+          "/usr/lib/libssl.so.3",
+          "/usr/lib/libyaml-0.so.2",
+          "/usr/lib/libz.so.1",
+          "/usr/lib/libzstd.so.1",
+          "/usr/lib64/ld-linux-x86-64.so.2"
+        ]
+      },
+      "runtime": "podman --rootfs: the built binary plus its host shared libraries",
+      "server_command": [
+        "/yamora",
+        "--data-dir",
+        "/data",
+        "--bind-address",
+        "10.89.0.11",
+        "--port",
+        "8765",
+        "--cache-bytes",
+        "268435456",
+        "--auth-token-file",
+        "/secrets/read.token",
+        "--write-auth-token-file",
+        "/secrets/write.token"
+      ],
+      "storage": {
+        "storage": "native-disk-v2"
+      },
+      "durability": "Native disk engine default (not configurable): each commit writes its records and copy-on-write tree pages, synchronizes, writes the alternate superblock and synchronizes again before replying.",
+      "cache": "--cache-bytes 268435456 (tree pages only; records use the OS page cache)",
+      "client": "yamora.YamoraClient (Python standard library, HTTP/1.1 JSON, new TCP connection per request)"
+    },
+    "mongodb": {
+      "product": "MongoDB Community Server",
+      "version": "9.0.4",
+      "image": {
+        "reference": "docker.io/library/mongo@sha256:452bdaf2127b8ff851e31410a267809b9829eded219979f2210e7c7efb85a058",
+        "tag": "9.0.4",
+        "platform_manifest": "sha256:ce91889f87a369d312e50ecbc6c0b7f960e915bc4b69c4f6662402fa7011d242",
+        "identity": {
+          "reference": "docker.io/library/mongo@sha256:452bdaf2127b8ff851e31410a267809b9829eded219979f2210e7c7efb85a058",
+          "image_id": "b56d78aee1b13f1e149a7208eaab503c238869c483209816eeba85636ede26a5",
+          "repo_digests": [
+            "docker.io/library/mongo@sha256:452bdaf2127b8ff851e31410a267809b9829eded219979f2210e7c7efb85a058",
+            "docker.io/library/mongo@sha256:ce91889f87a369d312e50ecbc6c0b7f960e915bc4b69c4f6662402fa7011d242"
+          ],
+          "architecture": "amd64",
+          "os": "linux",
+          "created": "2026-10-26T23:25:37.69795435Z"
+        }
+      },
+      "server_command": [
+        "mongod",
+        "--wiredTigerCacheSizeGB",
+        "0.25",
+        "--bind_ip_all"
+      ],
+      "parsed_options": {
+        "net": {
+          "bindIp": "*"
+        },
+        "security": {
+          "authorization": "enabled"
+        },
+        "storage": {
+          "wiredTiger": {
+            "engineConfig": {
+              "cacheSizeGB": 0.25
+            }
+          }
+        }
+      },
+      "storage_engine": "wiredTiger",
+      "durability": "WiredTiger journal on (always enabled since MongoDB 6.1); every insert, update and delete uses writeConcern {w: 1, j: true}, which waits for the journal flush.",
+      "cache": "--wiredTigerCacheSizeGB 0.25; WiredTiger block compression default (snappy)",
+      "client": "yamora.benchmarks.compare.mongo_wire (Python standard library OP_MSG/BSON/SCRAM-SHA-256; one persistent TCP connection per client process; not the official driver)"
+    },
+    "postgresql": {
+      "product": "PostgreSQL",
+      "version": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "image": {
+        "reference": "docker.io/library/postgres@sha256:979bccfde35445db618c65107d27d08c6c21339d8dc3ad4c830c6633947be0e4",
+        "tag": "18.6-trixie",
+        "platform_manifest": "sha256:f4b419e350fd98d4a8429603295208976dea4c8fb8326d818d346d3e29f1db6f",
+        "identity": {
+          "reference": "docker.io/library/postgres@sha256:979bccfde35445db618c65107d27d08c6c21339d8dc3ad4c830c6633947be0e4",
+          "image_id": "a1be1c8380f5c8ca80b4ad72f6be191f8a283e0ecb2e9496b1ee67dc0022d0f1",
+          "repo_digests": [
+            "docker.io/library/postgres@sha256:979bccfde35445db618c65107d27d08c6c21339d8dc3ad4c830c6633947be0e4",
+            "docker.io/library/postgres@sha256:f4b419e350fd98d4a8429603295208976dea4c8fb8326d818d346d3e29f1db6f"
+          ],
+          "architecture": "amd64",
+          "os": "linux",
+          "created": "2026-10-28T01:30:24.595032418Z"
+        }
+      },
+      "server_command": [
+        "postgres",
+        "-c",
+        "listen_addresses=*",
+        "-c",
+        "shared_buffers=256MB",
+        "-c",
+        "fsync=on",
+        "-c",
+        "synchronous_commit=on",
+        "-c",
+        "full_page_writes=on",
+        "-c",
+        "wal_sync_method=fdatasync",
+        "-c",
+        "max_connections=40"
+      ],
+      "settings": {
+        "server_version": "18.6 (Debian 18.6-1.pgdg13+2)",
+        "fsync": "on",
+        "synchronous_commit": "on",
+        "full_page_writes": "on",
+        "wal_sync_method": "fdatasync",
+        "shared_buffers": "256MB",
+        "wal_level": "replica",
+        "autovacuum": "on"
+      },
+      "schema": "items(id text PRIMARY KEY, doc jsonb NOT NULL); B-tree expression indexes on doc->'category' and doc->'price'; GIN on to_tsvector('simple', doc->>'description')",
+      "durability": "fsync=on, synchronous_commit=on, full_page_writes=on, wal_sync_method=fdatasync; every statement autocommits, so each insert batch, update and delete batch waits for its WAL flush.",
+      "cache": "shared_buffers=256MB, plus the OS page cache inside the container limit",
+      "client": "psycopg2 (C extension over libpq; one persistent connection per client process); psycopg2 2.9.12"
+    }
+  },
+  "runs": [
+    {
+      "engine": "yamora",
+      "repetition": 1,
+      "status": "ok",
+      "phases": {
+        "ingest": {
+          "operations": 20,
+          "items": 2000,
+          "concurrency": 1,
+          "wall_seconds": 6.516185832,
+          "throughput_ops_s": 3.0692801764159388,
+          "throughput_items_s": 306.9280176415939,
+          "latency_ms": {
+            "p50": 324.594613,
+            "p95": 406.062727,
+            "p99": 480.705107,
+            "mean": 325.809292,
+            "max": 499.365702
+          }
+        },
+        "point_read@c1": {
+          "operations": 300,
+          "items": 300,
+          "concurrency": 1,
+          "wall_seconds": 0.234843209,
+          "throughput_ops_s": 1277.448052585587,
+          "throughput_items_s": 1277.448052585587,
+          "latency_ms": {
+            "p50": 0.505039,
+            "p95": 2.312853,
+            "p99": 2.764876,
+            "mean": 0.779729,
+            "max": 3.258084
+          }
+        },
+        "query_eq@c1": {
+          "operations": 100,
+          "items": 100,
+          "concurrency": 1,
+          "wall_seconds": 0.287366342,
+          "throughput_ops_s": 347.9878656074482,
+          "throughput_items_s": 347.9878656074482,
+          "latency_ms": {
+            "p50": 2.313804,
+            "p95": 5.525465,
+            "p99": 6.054892,
+            "mean": 2.87016,
+            "max": 6.488902
+          }
+        },
+        "query_range@c1": {
+          "operations": 100,
+          "items": 100,
+          "concurrency": 1,
+          "wall_seconds": 1.698580869,
+          "throughput_ops_s": 58.87267531682061,
+          "throughput_items_s": 58.87267531682061,
+          "latency_ms": {
+            "p50": 17.870134,
+            "p95": 28.619338,
+            "p99": 29.396044,
+            "mean": 16.981254,
+            "max": 29.863009
+          }
+        },
+        "text@c1": {
+          "operations": 100,
+          "items": 100,
+          "concurrency": 1,
+          "wall_seconds": 0.153495462,
+          "throughput_ops_s": 651.4850582357933,
+          "throughput_items_s": 651.4850582357933,
+          "latency_ms": {
+            "p50": 1.121072,
+            "p95": 3.382699,
+            "p99": 3.8738,
+            "mean": 1.53267,
+            "max": 4.356132
+          }
+        },
+        "point_read@c2": {
+          "operations": 300,
+          "items": 300,
+          "concurrency": 2,
+          "wall_seconds": 0.091538231,
+          "throughput_ops_s": 3277.319178256788,
+          "throughput_items_s": 3277.319178256788,
+          "latency_ms": {
+            "p50": 0.375762,
+            "p95": 2.058867,
+            "p99": 2.20297,
+            "mean": 0.600921,
+            "max": 2.319009
+          }
+        },
+        "query_eq@c2": {
+          "operations": 100,
+          "items": 100,
+          "concurrency": 2,
+          "wall_seconds": 0.134700152,
+          "throughput_ops_s": 742.3896596642297,
+          "throughput_items_s": 742.3896596642297,
+          "latency_ms": {
+            "p50": 1.994511,
+            "p95": 5.688636,
+            "p99": 6.314808,
+            "mean": 2.677761,
+            "max": 7.045377
+          }
+        },
+        "query_range@c2": {
+          "operations": 100,
+          "items": 100,
+          "concurrency": 2,
+          "wall_seconds": 1.069240081,
+          "throughput_ops_s": 93.5243653665467,
+          "throughput_items_s": 93.5243653665467,
+          "latency_ms": {
+            "p50": 20.624311,
+            "p95": 36.076554,
+            "p99": 43.912972,
+            "mean": 20.418937,
+            "max": 50.212451
+          }
+        },
+        "text@c2": {
+          "operations": 100,
+          "items": 100,
+          "concurrency": 2,
+          "wall_seconds": 0.122985876,
+          "throughput_ops_s": 813.101497931356,
+          "throughput_items_s": 813.101497931356,
+          "latency_ms": {
+            "p50": 1.900251,
+            "p95": 4.959295,
+            "p99": 5.272733,
+            "mean": 2.452249,
+            "max": 5.344961
+          }
+        },
+        "aggregate": {
+          "operations": 5,
+          "items": 5,
+          "concurrency": 1,
+          "wall_seconds": 0.160957608,
+          "throughput_ops_s": 31.064079928424384,
+          "throughput_items_s": 31.064079928424384,
+          "latency_ms": {
+            "p50": 32.041166,
+            "p95": 33.303094,
+            "p99": 33.505628,
+            "mean": 32.186926,
+            "max": 33.556262
+          }
+        },
+        "update@c1": {
+          "operations": 200,
+          "items": 200,
+          "concurrency": 1,
+          "wall_seconds": 2.397760783,
+          "throughput_ops_s": 83.41115653320784,
+          "throughput_items_s": 83.41115653320784,
+          "latency_ms": {
+            "p50": 11.765239,
+            "p95": 15.153984,
+            "p99": 19.82717,
+            "mean": 11.982,
+            "max": 22.883786
+          }
+        },
+        "mixed@c1": {
+          "operations": 300,
+          "items": 300,
+          "concurrency": 1,
+          "wall_seconds": 0.82350538,
+          "throughput_ops_s": 364.296344973484,
+          "throughput_items_s": 364.296344973484,
+          "latency_ms": {
+            "p50": 0.605929,
+            "p95": 12.259148,
+            "p99": 13.439469,
+            "mean": 2.741246,
+            "max": 14.738767
+          }
+        },
+        "update@c2": {
+          "operations": 200,
+          "items": 200,
+          "concurrency": 2,
+          "wall_seconds": 1.793955013,
+          "throughput_ops_s": 111.48551582993348,
+          "throughput_items_s": 111.48551582993348,
+          "latency_ms": {
+            "p50": 17.786015,
+            "p95": 21.509851,
+            "p99": 22.833551,
+            "mean": 17.887243,
+            "max": 24.912516
+          }
+        },
+        "mixed@c2": {
+          "operations": 300,
+          "items": 300,
+          "concurrency": 2,
+          "wall_seconds": 0.55062834,
+          "throughput_ops_s": 544.8321094406438,
+          "throughput_items_s": 544.8321094406438,
+          "latency_ms": {
+            "p50": 0.516456,
+            "p95": 17.919037,
+            "p99": 19.992759,
+            "mean": 3.563725,
+            "max": 41.121047
+          }
+        },
+        "delete": {
+          "operations": 10,
+          "items": 1000,
+          "concurrency": 1,
+          "wall_seconds": 4.29777478,
+          "throughput_ops_s": 2.3267854906068393,
+          "throughput_items_s": 232.6785490606839,
+          "latency_ms": {
+            "p50": 417.675073,
+            "p95": 480.430523,
+            "p99": 496.711231,
+            "mean": 429.777478,
+            "max": 500.781408
+          }
+        }
+      },
+      "disk": {
+        "after_ingest": {
+          "allocated_bytes": 65638400,
+          "apparent_bytes": 65638400,
+          "files": 1,
+          "largest_entries_allocated_bytes": {
+            ".yamora-disk": 65638400
+          }
+        },
+        "after_deletes": {
+          "allocated_bytes": 291229696,
+          "apparent_bytes": 371089408,
+          "files": 1,
+          "largest_entries_allocated_bytes": {
+            ".yamora-disk": 291229696
+          }
+        }
+      },
+      "checks": {
+        "count_after_ingest": 2000,
+        "verified_operations": 80,
+        "aggregate_matches_expected": true,
+        "exact_source_preserved": true,
+        "acknowledged_updates_visible": 558,
+        "count_after_deletes": 1000
+      },
+      "plans": {
+        "eq": {
+          "plan": "index",
+          "index": "category",
+          "documents_examined": 74,
+          "index_entries_examined": 74
+        },
+        "range": {
+          "plan": "index",
+          "index": "price",
+          "documents_examined": 1135,
+          "index_entries_examined": 1135
+        },
+        "text": {
+          "method": "native inverted postings (search API reports work counters)",
+          "documents_examined": 21,
+          "index_entries_examined": 21
+        }
+      },
+      "memory": {
+        "method": "cgroup.procs sampled every 0.25s; VmRSS and smaps_rollup Pss summed; cgroup memory.peak",
+        "samples": 89,
+        "peak_rss_bytes": 284684288,
+        "peak_pss_bytes": 284672000,
+        "max_process_hwm_bytes": 284684288,
+        "max_processes": 1,
+        "cgroup_memory_peak_bytes": 539693056,
+        "cgroup_memory_max_bytes": 1073741824
+      },
+      "teardown": {
+        "container_removed": true,
+        "data_removed": true
+      }
+    },
+    {
+      "engine": "mongodb",
+      "repetition": 1,
+      "status": "ok",
+      "phases": {
+        "ingest": {
+          "operations": 20,
+          "items": 2000,
+          "concurrency": 1,
+          "wall_seconds": 0.435096196,
+          "throughput_ops_s": 45.96684637527835,
+          "throughput_items_s": 4596.684637527836,
+          "latency_ms": {
+            "p50": 19.711268,
+            "p95": 29.462614,
+            "p99": 53.403373,
+            "mean": 21.75481,
+            "max": 59.388563
+          }
+        },
+        "point_read@c1": {
+          "operations": 300,
+          "items": 300,
+          "concurrency": 1,
+          "wall_seconds": 0.061655558,
+          "throughput_ops_s": 4865.741382147576,
+          "throughput_items_s": 4865.741382147576,
+          "latency_ms": {
+            "p50": 0.151966,
+            "p95": 0.492654,
+            "p99": 0.627537,
+            "mean": 0.204148,
+            "max": 1.471521
+          }
+        },
+        "query_eq@c1": {
+          "operations": 100,
+          "items": 100,
+          "concurrency": 1,
+          "wall_seconds": 0.141751475,
+          "throughput_ops_s": 705.4600313682804,
+          "throughput_items_s": 705.4600313682804,
+          "latency_ms": {
+            "p50": 1.04269,
+            "p95": 3.41321,
+            "p99": 3.951357,
+            "mean": 1.413382,
+            "max": 4.516028
+          }
+        },
+        "query_range@c1": {
+          "operations": 100,
+          "items": 100,
+          "concurrency": 1,
+          "wall_seconds": 0.143762869,
+          "throughput_ops_s": 695.5899022855479,
+          "throughput_items_s": 695.5899022855479,
+          "latency_ms": {
+            "p50": 0.95907,
+            "p95": 3.623056,
+            "p99": 6.163693,
+            "mean": 1.432244,
+            "max": 6.623902
+          }
+        },
+        "text@c1": {
+          "operations": 100,
+          "items": 100,
+          "concurrency": 1,
+          "wall_seconds": 0.159439797,
+          "throughput_ops_s": 627.1959816908196,
+          "throughput_items_s": 627.1959816908196,
+          "latency_ms": {
+            "p50": 1.101756,
+            "p95": 4.013308,
+            "p99": 4.770221,
+            "mean": 1.58937,
+            "max": 6.426941
+          }
+        },
+        "point_read@c2": {
+          "operations": 300,
+          "items": 300,
+          "concurrency": 2,
+          "wall_seconds": 0.038619413,
+          "throughput_ops_s": 7768.113927573161,
+          "throughput_items_s": 7768.113927573161,
+          "latency_ms": {
+            "p50": 0.183319,
+            "p95": 0.585871,
+            "p99": 1.139097,
+            "mean": 0.24733,
+            "max": 1.762024
+          }
+        },
+        "query_eq@c2": {
+          "operations": 100,
+          "items": 100,
+          "concurrency": 2,
+          "wall_seconds": 0.071644138,
+          "throughput_ops_s": 1395.7876079128764,
+          "throughput_items_s": 1395.7876079128764,
+          "latency_ms": {
+            "p50": 1.022864,
+            "p95": 2.653159,
+            "p99": 3.326334,
+            "mean": 1.288477,
+            "max": 4.081873
+          }
+        },
+        "query_range@c2": {
+          "operations": 100,
+          "items": 100,
+          "concurrency": 2,
+          "wall_seconds": 0.046915149,
+          "throughput_ops_s": 2131.5076714346574,
+          "throughput_items_s": 2131.5076714346574,
+          "latency_ms": {
+            "p50": 0.62263,
+            "p95": 2.165051,
+            "p99": 2.282865,
+            "mean": 0.912842,
+            "max": 2.353317
+          }
+        },
+        "text@c2": {
+          "operations": 100,
+          "items": 100,
+          "concurrency": 2,
+          "wall_seconds": 0.08178133,
+          "throughput_ops_s": 1222.7729727555177,
+          "throughput_items_s": 1222.7729727555177,
+          "latency_ms": {
+            "p50": 1.1497,
+            "p95": 3.27653,
+            "p99": 3.420394,
+            "mean": 1.511666,
+            "max": 4.066329
+          }
+        },
+        "aggregate": {
+          "operations": 5,
+          "items": 5,
+          "concurrency": 1,
+          "wall_seconds": 0.008338772,
+          "throughput_ops_s": 599.6086713966997,
+          "throughput_items_s": 599.6086713966997,
+          "latency_ms": {
+            "p50": 1.462354,
+            "p95": 2.309907,
+            "p99": 2.467297,
+            "mean": 1.664747,
+            "max": 2.506645
+          }
+        },
+        "update@c1": {
+          "operations": 200,
+          "items": 200,
+          "concurrency": 1,
+          "wall_seconds": 0.425278101,
+          "throughput_ops_s": 470.28050475611013,
+          "throughput_items_s": 470.28050475611013,
+          "latency_ms": {
+            "p50": 1.746757,
+            "p95": 3.588952,
+            "p99": 4.196554,
+            "mean": 2.121895,
+            "max": 6.258677
+          }
+        },
+        "mixed@c1": {
+          "operations": 300,
+          "items": 300,
+          "concurrency": 1,
+          "wall_seconds": 0.149283126,
+          "throughput_ops_s": 2009.604220104555,
+          "throughput_items_s": 2009.604220104555,
+          "latency_ms": {
+            "p50": 0.13424,
+            "p95": 2.102217,
+            "p99": 3.293236,
+            "mean": 0.496287,
+            "max": 3.966266
+          }
+        },
+        "update@c2": {
+          "operations": 200,
+          "items": 200,
+          "concurrency": 2,
+          "wall_seconds": 0.535453312,
+          "throughput_ops_s": 373.51529165627795,
+          "throughput_items_s": 373.51529165627795,
+          "latency_ms": {
+            "p50": 4.4874,
+            "p95": 10.755449,
+            "p99": 13.698329,
+            "mean": 5.33908,
+            "max": 14.960444
+          }
+        },
+        "mixed@c2": {
+          "operations": 300,
+          "items": 300,
+          "concurrency": 2,
+          "wall_seconds": 0.178458819,
+          "throughput_ops_s": 1681.0600993610744,
+          "throughput_items_s": 1681.0600993610744,
+          "latency_ms": {
+            "p50": 0.168435,
+            "p95": 6.539303,
+            "p99": 8.338082,
+            "mean": 1.167149,
+            "max": 11.774041
+          }
+        },
+        "delete": {
+          "operations": 10,
+          "items": 1000,
+          "concurrency": 1,
+          "wall_seconds": 0.194154434,
+          "throughput_ops_s": 51.505390806578234,
+          "throughput_items_s": 5150.539080657823,
+          "latency_ms": {
+            "p50": 19.247111,
+            "p95": 23.886775,
+            "p99": 25.50409,
+            "mean": 19.415443,
+            "max": 25.908419
+          }
+        }
+      },
+      "disk": {
+        "after_ingest": {
+          "allocated_bytes": 212238336,
+          "apparent_bytes": 212185271,
+          "files": 39,
+          "largest_entries_allocated_bytes": {
+            "journal/": 209715200,
+            "index-73e6a065-f51d-4342-9b0b-40dd866a65e5.wt": 1257472,
+            "collection-840cc490-f88d-46d7-97e0-dd68b6e7300d.wt": 499712,
+            "diagnostic.data/": 204800,
+            "WiredTiger.wt": 110592,
+            "index-bad406be-4177-4e77-8dac-c1d70a748cf7.wt": 40960,
+            "_mdb_catalog.wt": 36864,
+            "_tmp/spilldb/": 36864,
+            "collection-7e72f9b4-430e-4bf3-85ed-a9d343226e3e.wt": 36864,
+            "index-00c2fd3e-d6aa-41fc-afa5-9b95356a64f6.wt": 36864,
+            "sizeStorer.wt": 36864,
+            "index-f1c2b02f-02d7-4d43-aefa-4aedc7e0f2f5.wt": 32768
+          }
+        },
+        "after_deletes": {
+          "allocated_bytes": 213364736,
+          "apparent_bytes": 213311672,
+          "files": 39,
+          "largest_entries_allocated_bytes": {
+            "journal/": 209715200,
+            "index-73e6a065-f51d-4342-9b0b-40dd866a65e5.wt": 2064384,
+            "collection-840cc490-f88d-46d7-97e0-dd68b6e7300d.wt": 753664,
+            "diagnostic.data/": 204800,
+            "WiredTiger.wt": 110592,
+            "index-bad406be-4177-4e77-8dac-c1d70a748cf7.wt": 65536,
+            "index-f1c2b02f-02d7-4d43-aefa-4aedc7e0f2f5.wt": 53248,
+            "index-ba9e5232-1edd-4e73-a247-b5612e808df5.wt": 49152,
+            "_mdb_catalog.wt": 36864,
+            "_tmp/spilldb/": 36864,
+            "collection-7e72f9b4-430e-4bf3-85ed-a9d343226e3e.wt": 36864,
+            "index-00c2fd3e-d6aa-41fc-afa5-9b95356a64f6.wt": 36864
+          }
+        }
+      },
+      "checks": {
+        "count_after_ingest": 2000,
+        "verified_operations": 80,
+        "aggregate_matches_expected": true,
+        "exact_source_preserved": "not provided by this engine",
+        "acknowledged_updates_visible": 558,
+        "count_after_deletes": 1000
+      },
+      "plans": {
+        "eq": {
+          "winning_plan": "LIMIT > FETCH > IXSCAN(category)",
+          "documents_examined": 20,
+          "index_keys_examined": 20
+        },
+        "range": {
+          "winning_plan": "LIMIT > FETCH > IXSCAN(price)",
+          "documents_examined": 9,
+          "index_keys_examined": 9
+        },
+        "text": {
+          "winning_plan": "LIMIT > TEXT_MATCH(description_text) > FETCH > IXSCAN(description_text)",
+          "documents_examined": 20,
+          "index_keys_examined": 20
+        }
+      },
+      "memory": {
+        "method": "cgroup.procs sampled every 0.25s; VmRSS and smaps_rollup Pss summed; cgroup memory.peak",
+        "samples": 14,
+        "peak_rss_bytes": 213532672,
+        "peak_pss_bytes": 213520384,
+        "max_process_hwm_bytes": 213544960,
+        "max_processes": 1,
+        "cgroup_memory_peak_bytes": 630775808,
+        "cgroup_memory_max_bytes": 1073741824
+      },
+      "teardown": {
+        "container_removed": true,
+        "data_removed": true
+      }
+    },
+    {
+      "engine": "postgresql",
+      "repetition": 1,
+      "status": "ok",
+      "phases": {
+        "ingest": {
+          "operations": 20,
+          "items": 2000,
+          "concurrency": 1,
+          "wall_seconds": 0.28994774,
+          "throughput_ops_s": 68.97794754323658,
+          "throughput_items_s": 6897.794754323658,
+          "latency_ms": {
+            "p50": 13.585031,
+            "p95": 17.117241,
+            "p99": 17.125888,
+            "mean": 14.497387,
+            "max": 17.12805
+          }
+        },
+        "point_read@c1": {
+          "operations": 300,
+          "items": 300,
+          "concurrency": 1,
+          "wall_seconds": 0.03009326,
+          "throughput_ops_s": 9969.009671933183,
+          "throughput_items_s": 9969.009671933183,
+          "latency_ms": {
+            "p50": 0.079163,
+            "p95": 0.184717,
+            "p99": 0.231703,
+            "mean": 0.09936,
+            "max": 0.567272
+          }
+        },
+        "query_eq@c1": {
+          "operations": 100,
+          "items": 100,
+          "concurrency": 1,
+          "wall_seconds": 0.025898427,
+          "throughput_ops_s": 3861.23836787462,
+          "throughput_items_s": 3861.23836787462,
+          "latency_ms": {
+            "p50": 0.225972,
+            "p95": 0.406192,
+            "p99": 0.472685,
+            "mean": 0.257998,
+            "max": 0.544784
+          }
+        },
+        "query_range@c1": {
+          "operations": 100,
+          "items": 100,
+          "concurrency": 1,
+          "wall_seconds": 0.020196514,
+          "throughput_ops_s": 4951.349524972478,
+          "throughput_items_s": 4951.349524972478,
+          "latency_ms": {
+            "p50": 0.177075,
+            "p95": 0.355988,
+            "p99": 0.407972,
+            "mean": 0.201378,
+            "max": 0.415913
+          }
+        },
+        "text@c1": {
+          "operations": 100,
+          "items": 100,
+          "concurrency": 1,
+          "wall_seconds": 1.396835481,
+          "throughput_ops_s": 71.59039225464805,
+          "throughput_items_s": 71.59039225464805,
+          "latency_ms": {
+            "p50": 13.603036,
+            "p95": 20.071203,
+            "p99": 23.37536,
+            "mean": 13.961025,
+            "max": 24.618683
+          }
+        },
+        "point_read@c2": {
+          "operations": 300,
+          "items": 300,
+          "concurrency": 2,
+          "wall_seconds": 0.029635417,
+          "throughput_ops_s": 10123.02273323841,
+          "throughput_items_s": 10123.02273323841,
+          "latency_ms": {
+            "p50": 0.139456,
+            "p95": 0.426616,
+            "p99": 0.664551,
+            "mean": 0.194161,
+            "max": 0.946067
+          }
+        },
+        "query_eq@c2": {
+          "operations": 100,
+          "items": 100,
+          "concurrency": 2,
+          "wall_seconds": 0.019576999,
+          "throughput_ops_s": 5108.035199879205,
+          "throughput_items_s": 5108.035199879205,
+          "latency_ms": {
+            "p50": 0.325456,
+            "p95": 0.718123,
+            "p99": 0.785428,
+            "mean": 0.377437,
+            "max": 0.798625
+          }
+        },
+        "query_range@c2": {
+          "operations": 100,
+          "items": 100,
+          "concurrency": 2,
+          "wall_seconds": 0.018126294,
+          "throughput_ops_s": 5516.847514445038,
+          "throughput_items_s": 5516.847514445038,
+          "latency_ms": {
+            "p50": 0.270024,
+            "p95": 0.751794,
+            "p99": 0.996857,
+            "mean": 0.342759,
+            "max": 1.044462
+          }
+        },
+        "text@c2": {
+          "operations": 100,
+          "items": 100,
+          "concurrency": 2,
+          "wall_seconds": 0.914473922,
+          "throughput_ops_s": 109.3524895508174,
+          "throughput_items_s": 109.3524895508174,
+          "latency_ms": {
+            "p50": 17.071978,
+            "p95": 30.6455,
+            "p99": 34.271304,
+            "mean": 18.095972,
+            "max": 37.99071
+          }
+        },
+        "aggregate": {
+          "operations": 5,
+          "items": 5,
+          "concurrency": 1,
+          "wall_seconds": 0.01454344,
+          "throughput_ops_s": 343.79761596981183,
+          "throughput_items_s": 343.79761596981183,
+          "latency_ms": {
+            "p50": 2.079996,
+            "p95": 4.300297,
+            "p99": 4.321738,
+            "mean": 2.905698,
+            "max": 4.327098
+          }
+        },
+        "update@c1": {
+          "operations": 200,
+          "items": 200,
+          "concurrency": 1,
+          "wall_seconds": 0.840535732,
+          "throughput_ops_s": 237.94348340684226,
+          "throughput_items_s": 237.94348340684226,
+          "latency_ms": {
+            "p50": 4.054888,
+            "p95": 6.501479,
+            "p99": 7.057221,
+            "mean": 4.194143,
+            "max": 7.257921
+          }
+        },
+        "mixed@c1": {
+          "operations": 300,
+          "items": 300,
+          "concurrency": 1,
+          "wall_seconds": 0.213460517,
+          "throughput_ops_s": 1405.4121306189847,
+          "throughput_items_s": 1405.4121306189847,
+          "latency_ms": {
+            "p50": 0.107133,
+            "p95": 3.621376,
+            "p99": 4.577548,
+            "mean": 0.70972,
+            "max": 5.101166
+          }
+        },
+        "update@c2": {
+          "operations": 200,
+          "items": 200,
+          "concurrency": 2,
+          "wall_seconds": 0.577340686,
+          "throughput_ops_s": 346.4159115229929,
+          "throughput_items_s": 346.4159115229929,
+          "latency_ms": {
+            "p50": 5.659133,
+            "p95": 7.511481,
+            "p99": 8.426689,
+            "mean": 5.745924,
+            "max": 8.543842
+          }
+        },
+        "mixed@c2": {
+          "operations": 300,
+          "items": 300,
+          "concurrency": 2,
+          "wall_seconds": 0.172359982,
+          "throughput_ops_s": 1740.5432312008481,
+          "throughput_items_s": 1740.5432312008481,
+          "latency_ms": {
+            "p50": 0.162867,
+            "p95": 6.046481,
+            "p99": 7.208073,
+            "mean": 1.08474,
+            "max": 8.266567
+          }
+        },
+        "delete": {
+          "operations": 10,
+          "items": 1000,
+          "concurrency": 1,
+          "wall_seconds": 0.03851547,
+          "throughput_ops_s": 259.6359333016058,
+          "throughput_items_s": 25963.59333016058,
+          "latency_ms": {
+            "p50": 3.618076,
+            "p95": 5.374556,
+            "p99": 5.44687,
+            "mean": 3.851547,
+            "max": 5.464949
+          }
+        }
+      },
+      "disk": {
+        "after_ingest": {
+          "allocated_bytes": 68616192,
+          "apparent_bytes": 68554902,
+          "files": 1282,
+          "largest_entries_allocated_bytes": {
+            "18/docker/base/": 34398208,
+            "18/docker/pg_wal/": 33554432,
+            "18/docker/global/": 565248,
+            "18/docker/": 61440,
+            "18/docker/pg_multixact/": 16384,
+            "18/docker/pg_subtrans/": 8192,
+            "18/docker/pg_xact/": 8192,
+            "18/docker/pg_logical/": 4096
+          }
+        },
+        "after_deletes": {
+          "allocated_bytes": 69320704,
+          "apparent_bytes": 69259414,
+          "files": 1282,
+          "largest_entries_allocated_bytes": {
+            "18/docker/base/": 35102720,
+            "18/docker/pg_wal/": 33554432,
+            "18/docker/global/": 565248,
+            "18/docker/": 61440,
+            "18/docker/pg_multixact/": 16384,
+            "18/docker/pg_subtrans/": 8192,
+            "18/docker/pg_xact/": 8192,
+            "18/docker/pg_logical/": 4096
+          }
+        }
+      },
+      "checks": {
+        "count_after_ingest": 2000,
+        "verified_operations": 80,
+        "aggregate_matches_expected": true,
+        "exact_source_preserved": "not provided by this engine",
+        "acknowledged_updates_visible": 558,
+        "count_after_deletes": 1000
+      },
+      "plans": {
+        "eq": {
+          "plan": "Limit > Bitmap Heap Scan > Bitmap Index Scan(items_category)"
+        },
+        "range": {
+          "plan": "Limit > Sort > Bitmap Heap Scan > Bitmap Index Scan(items_price)"
+        },
+        "text": {
+          "plan": "Limit > Seq Scan"
+        }
+      },
+      "memory": {
+        "method": "cgroup.procs sampled every 0.25s; VmRSS and smaps_rollup Pss summed; cgroup memory.peak",
+        "samples": 24,
+        "peak_rss_bytes": 192155648,
+        "peak_pss_bytes": 59337728,
+        "max_process_hwm_bytes": 37158912,
+        "max_processes": 12,
+        "cgroup_memory_peak_bytes": 186531840,
+        "cgroup_memory_max_bytes": 1073741824
+      },
+      "teardown": {
+        "container_removed": true,
+        "data_removed": true
+      }
+    }
+  ],
+  "summary": {
+    "yamora": {
+      "successful_runs": 1,
+      "phases": {
+        "ingest": {
+          "repetitions": 1,
+          "operations": 20,
+          "items": 2000,
+          "concurrency": 1,
+          "wall_seconds": 6.516185832,
+          "throughput_ops_s": 3.0692801764159388,
+          "throughput_items_s": 306.9280176415939,
+          "latency_ms": {
+            "p50": 324.594613,
+            "p95": 406.062727,
+            "p99": 480.705107,
+            "mean": 325.809292,
+            "max": 499.365702
+          },
+          "throughput_ops_s_range": [
+            3.0692801764159388,
+            3.0692801764159388
+          ]
+        },
+        "point_read@c1": {
+          "repetitions": 1,
+          "operations": 300,
+          "items": 300,
+          "concurrency": 1,
+          "wall_seconds": 0.234843209,
+          "throughput_ops_s": 1277.448052585587,
+          "throughput_items_s": 1277.448052585587,
+          "latency_ms": {
+            "p50": 0.505039,
+            "p95": 2.312853,
+            "p99": 2.764876,
+            "mean": 0.779729,
+            "max": 3.258084
+          },
+          "throughput_ops_s_range": [
+            1277.448052585587,
+            1277.448052585587
+          ]
+        },
+        "query_eq@c1": {
+          "repetitions": 1,
+          "operations": 100,
+          "items": 100,
+          "concurrency": 1,
+          "wall_seconds": 0.287366342,
+          "throughput_ops_s": 347.9878656074482,
+          "throughput_items_s": 347.9878656074482,
+          "latency_ms": {
+            "p50": 2.313804,
+            "p95": 5.525465,
+            "p99": 6.054892,
+            "mean": 2.87016,
+            "max": 6.488902
+          },
+          "throughput_ops_s_range": [
+            347.9878656074482,
+            347.9878656074482
+          ]
+        },
+        "query_range@c1": {
+          "repetitions": 1,
+          "operations": 100,
+          "items": 100,
+          "concurrency": 1,
+          "wall_seconds": 1.698580869,
+          "throughput_ops_s": 58.87267531682061,
+          "throughput_items_s": 58.87267531682061,
+          "latency_ms": {
+            "p50": 17.870134,
+            "p95": 28.619338,
+            "p99": 29.396044,
+            "mean": 16.981254,
+            "max": 29.863009
+          },
+          "throughput_ops_s_range": [
+            58.87267531682061,
+            58.87267531682061
+          ]
+        },
+        "text@c1": {
+          "repetitions": 1,
+          "operations": 100,
+          "items": 100,
+          "concurrency": 1,
+          "wall_seconds": 0.153495462,
+          "throughput_ops_s": 651.4850582357933,
+          "throughput_items_s": 651.4850582357933,
+          "latency_ms": {
+            "p50": 1.121072,
+            "p95": 3.382699,
+            "p99": 3.8738,
+            "mean": 1.53267,
+            "max": 4.356132
+          },
+          "throughput_ops_s_range": [
+            651.4850582357933,
+            651.4850582357933
+          ]
+        },
+        "point_read@c2": {
+          "repetitions": 1,
+          "operations": 300,
+          "items": 300,
+          "concurrency": 2,
+          "wall_seconds": 0.091538231,
+          "throughput_ops_s": 3277.319178256788,
+          "throughput_items_s": 3277.319178256788,
+          "latency_ms": {
+            "p50": 0.375762,
+            "p95": 2.058867,
+            "p99": 2.20297,
+            "mean": 0.600921,
+            "max": 2.319009
+          },
+          "throughput_ops_s_range": [
+            3277.319178256788,
+            3277.319178256788
+          ]
+        },
+        "query_eq@c2": {
+          "repetitions": 1,
+          "operations": 100,
+          "items": 100,
+          "concurrency": 2,
+          "wall_seconds": 0.134700152,
+          "throughput_ops_s": 742.3896596642297,
+          "throughput_items_s": 742.3896596642297,
+          "latency_ms": {
+            "p50": 1.994511,
+            "p95": 5.688636,
+            "p99": 6.314808,
+            "mean": 2.677761,
+            "max": 7.045377
+          },
+          "throughput_ops_s_range": [
+            742.3896596642297,
+            742.3896596642297
+          ]
+        },
+        "query_range@c2": {
+          "repetitions": 1,
+          "operations": 100,
+          "items": 100,
+          "concurrency": 2,
+          "wall_seconds": 1.069240081,
+          "throughput_ops_s": 93.5243653665467,
+          "throughput_items_s": 93.5243653665467,
+          "latency_ms": {
+            "p50": 20.624311,
+            "p95": 36.076554,
+            "p99": 43.912972,
+            "mean": 20.418937,
+            "max": 50.212451
+          },
+          "throughput_ops_s_range": [
+            93.5243653665467,
+            93.5243653665467
+          ]
+        },
+        "text@c2": {
+          "repetitions": 1,
+          "operations": 100,
+          "items": 100,
+          "concurrency": 2,
+          "wall_seconds": 0.122985876,
+          "throughput_ops_s": 813.101497931356,
+          "throughput_items_s": 813.101497931356,
+          "latency_ms": {
+            "p50": 1.900251,
+            "p95": 4.959295,
+            "p99": 5.272733,
+            "mean": 2.452249,
+            "max": 5.344961
+          },
+          "throughput_ops_s_range": [
+            813.101497931356,
+            813.101497931356
+          ]
+        },
+        "aggregate": {
+          "repetitions": 1,
+          "operations": 5,
+          "items": 5,
+          "concurrency": 1,
+          "wall_seconds": 0.160957608,
+          "throughput_ops_s": 31.064079928424384,
+          "throughput_items_s": 31.064079928424384,
+          "latency_ms": {
+            "p50": 32.041166,
+            "p95": 33.303094,
+            "p99": 33.505628,
+            "mean": 32.186926,
+            "max": 33.556262
+          },
+          "throughput_ops_s_range": [
+            31.064079928424384,
+            31.064079928424384
+          ]
+        },
+        "update@c1": {
+          "repetitions": 1,
+          "operations": 200,
+          "items": 200,
+          "concurrency": 1,
+          "wall_seconds": 2.397760783,
+          "throughput_ops_s": 83.41115653320784,
+          "throughput_items_s": 83.41115653320784,
+          "latency_ms": {
+            "p50": 11.765239,
+            "p95": 15.153984,
+            "p99": 19.82717,
+            "mean": 11.982,
+            "max": 22.883786
+          },
+          "throughput_ops_s_range": [
+            83.41115653320784,
+            83.41115653320784
+          ]
+        },
+        "mixed@c1": {
+          "repetitions": 1,
+          "operations": 300,
+          "items": 300,
+          "concurrency": 1,
+          "wall_seconds": 0.82350538,
+          "throughput_ops_s": 364.296344973484,
+          "throughput_items_s": 364.296344973484,
+          "latency_ms": {
+            "p50": 0.605929,
+            "p95": 12.259148,
+            "p99": 13.439469,
+            "mean": 2.741246,
+            "max": 14.738767
+          },
+          "throughput_ops_s_range": [
+            364.296344973484,
+            364.296344973484
+          ]
+        },
+        "update@c2": {
+          "repetitions": 1,
+          "operations": 200,
+          "items": 200,
+          "concurrency": 2,
+          "wall_seconds": 1.793955013,
+          "throughput_ops_s": 111.48551582993348,
+          "throughput_items_s": 111.48551582993348,
+          "latency_ms": {
+            "p50": 17.786015,
+            "p95": 21.509851,
+            "p99": 22.833551,
+            "mean": 17.887243,
+            "max": 24.912516
+          },
+          "throughput_ops_s_range": [
+            111.48551582993348,
+            111.48551582993348
+          ]
+        },
+        "mixed@c2": {
+          "repetitions": 1,
+          "operations": 300,
+          "items": 300,
+          "concurrency": 2,
+          "wall_seconds": 0.55062834,
+          "throughput_ops_s": 544.8321094406438,
+          "throughput_items_s": 544.8321094406438,
+          "latency_ms": {
+            "p50": 0.516456,
+            "p95": 17.919037,
+            "p99": 19.992759,
+            "mean": 3.563725,
+            "max": 41.121047
+          },
+          "throughput_ops_s_range": [
+            544.8321094406438,
+            544.8321094406438
+          ]
+        },
+        "delete": {
+          "repetitions": 1,
+          "operations": 10,
+          "items": 1000,
+          "concurrency": 1,
+          "wall_seconds": 4.29777478,
+          "throughput_ops_s": 2.3267854906068393,
+          "throughput_items_s": 232.6785490606839,
+          "latency_ms": {
+            "p50": 417.675073,
+            "p95": 480.430523,
+            "p99": 496.711231,
+            "mean": 429.777478,
+            "max": 500.781408
+          },
+          "throughput_ops_s_range": [
+            2.3267854906068393,
+            2.3267854906068393
+          ]
+        }
+      },
+      "disk_after_ingest_allocated_bytes": 65638400,
+      "disk_after_deletes_allocated_bytes": 291229696,
+      "peak_rss_bytes": 284684288,
+      "peak_pss_bytes": 284672000,
+      "cgroup_memory_peak_bytes": 539693056
+    },
+    "mongodb": {
+      "successful_runs": 1,
+      "phases": {
+        "ingest": {
+          "repetitions": 1,
+          "operations": 20,
+          "items": 2000,
+          "concurrency": 1,
+          "wall_seconds": 0.435096196,
+          "throughput_ops_s": 45.96684637527835,
+          "throughput_items_s": 4596.684637527836,
+          "latency_ms": {
+            "p50": 19.711268,
+            "p95": 29.462614,
+            "p99": 53.403373,
+            "mean": 21.75481,
+            "max": 59.388563
+          },
+          "throughput_ops_s_range": [
+            45.96684637527835,
+            45.96684637527835
+          ]
+        },
+        "point_read@c1": {
+          "repetitions": 1,
+          "operations": 300,
+          "items": 300,
+          "concurrency": 1,
+          "wall_seconds": 0.061655558,
+          "throughput_ops_s": 4865.741382147576,
+          "throughput_items_s": 4865.741382147576,
+          "latency_ms": {
+            "p50": 0.151966,
+            "p95": 0.492654,
+            "p99": 0.627537,
+            "mean": 0.204148,
+            "max": 1.471521
+          },
+          "throughput_ops_s_range": [
+            4865.741382147576,
+            4865.741382147576
+          ]
+        },
+        "query_eq@c1": {
+          "repetitions": 1,
+          "operations": 100,
+          "items": 100,
+          "concurrency": 1,
+          "wall_seconds": 0.141751475,
+          "throughput_ops_s": 705.4600313682804,
+          "throughput_items_s": 705.4600313682804,
+          "latency_ms": {
+            "p50": 1.04269,
+            "p95": 3.41321,
+            "p99": 3.951357,
+            "mean": 1.413382,
+            "max": 4.516028
+          },
+          "throughput_ops_s_range": [
+            705.4600313682804,
+            705.4600313682804
+          ]
+        },
+        "query_range@c1": {
+          "repetitions": 1,
+          "operations": 100,
+          "items": 100,
+          "concurrency": 1,
+          "wall_seconds": 0.143762869,
+          "throughput_ops_s": 695.5899022855479,
+          "throughput_items_s": 695.5899022855479,
+          "latency_ms": {
+            "p50": 0.95907,
+            "p95": 3.623056,
+            "p99": 6.163693,
+            "mean": 1.432244,
+            "max": 6.623902
+          },
+          "throughput_ops_s_range": [
+            695.5899022855479,
+            695.5899022855479
+          ]
+        },
+        "text@c1": {
+          "repetitions": 1,
+          "operations": 100,
+          "items": 100,
+          "concurrency": 1,
+          "wall_seconds": 0.159439797,
+          "throughput_ops_s": 627.1959816908196,
+          "throughput_items_s": 627.1959816908196,
+          "latency_ms": {
+            "p50": 1.101756,
+            "p95": 4.013308,
+            "p99": 4.770221,
+            "mean": 1.58937,
+            "max": 6.426941
+          },
+          "throughput_ops_s_range": [
+            627.1959816908196,
+            627.1959816908196
+          ]
+        },
+        "point_read@c2": {
+          "repetitions": 1,
+          "operations": 300,
+          "items": 300,
+          "concurrency": 2,
+          "wall_seconds": 0.038619413,
+          "throughput_ops_s": 7768.113927573161,
+          "throughput_items_s": 7768.113927573161,
+          "latency_ms": {
+            "p50": 0.183319,
+            "p95": 0.585871,
+            "p99": 1.139097,
+            "mean": 0.24733,
+            "max": 1.762024
+          },
+          "throughput_ops_s_range": [
+            7768.113927573161,
+            7768.113927573161
+          ]
+        },
+        "query_eq@c2": {
+          "repetitions": 1,
+          "operations": 100,
+          "items": 100,
+          "concurrency": 2,
+          "wall_seconds": 0.071644138,
+          "throughput_ops_s": 1395.7876079128764,
+          "throughput_items_s": 1395.7876079128764,
+          "latency_ms": {
+            "p50": 1.022864,
+            "p95": 2.653159,
+            "p99": 3.326334,
+            "mean": 1.288477,
+            "max": 4.081873
+          },
+          "throughput_ops_s_range": [
+            1395.7876079128764,
+            1395.7876079128764
+          ]
+        },
+        "query_range@c2": {
+          "repetitions": 1,
+          "operations": 100,
+          "items": 100,
+          "concurrency": 2,
+          "wall_seconds": 0.046915149,
+          "throughput_ops_s": 2131.5076714346574,
+          "throughput_items_s": 2131.5076714346574,
+          "latency_ms": {
+            "p50": 0.62263,
+            "p95": 2.165051,
+            "p99": 2.282865,
+            "mean": 0.912842,
+            "max": 2.353317
+          },
+          "throughput_ops_s_range": [
+            2131.5076714346574,
+            2131.5076714346574
+          ]
+        },
+        "text@c2": {
+          "repetitions": 1,
+          "operations": 100,
+          "items": 100,
+          "concurrency": 2,
+          "wall_seconds": 0.08178133,
+          "throughput_ops_s": 1222.7729727555177,
+          "throughput_items_s": 1222.7729727555177,
+          "latency_ms": {
+            "p50": 1.1497,
+            "p95": 3.27653,
+            "p99": 3.420394,
+            "mean": 1.511666,
+            "max": 4.066329
+          },
+          "throughput_ops_s_range": [
+            1222.7729727555177,
+            1222.7729727555177
+          ]
+        },
+        "aggregate": {
+          "repetitions": 1,
+          "operations": 5,
+          "items": 5,
+          "concurrency": 1,
+          "wall_seconds": 0.008338772,
+          "throughput_ops_s": 599.6086713966997,
+          "throughput_items_s": 599.6086713966997,
+          "latency_ms": {
+            "p50": 1.462354,
+            "p95": 2.309907,
+            "p99": 2.467297,
+            "mean": 1.664747,
+            "max": 2.506645
+          },
+          "throughput_ops_s_range": [
+            599.6086713966997,
+            599.6086713966997
+          ]
+        },
+        "update@c1": {
+          "repetitions": 1,
+          "operations": 200,
+          "items": 200,
+          "concurrency": 1,
+          "wall_seconds": 0.425278101,
+          "throughput_ops_s": 470.28050475611013,
+          "throughput_items_s": 470.28050475611013,
+          "latency_ms": {
+            "p50": 1.746757,
+            "p95": 3.588952,
+            "p99": 4.196554,
+            "mean": 2.121895,
+            "max": 6.258677
+          },
+          "throughput_ops_s_range": [
+            470.28050475611013,
+            470.28050475611013
+          ]
+        },
+        "mixed@c1": {
+          "repetitions": 1,
+          "operations": 300,
+          "items": 300,
+          "concurrency": 1,
+          "wall_seconds": 0.149283126,
+          "throughput_ops_s": 2009.604220104555,
+          "throughput_items_s": 2009.604220104555,
+          "latency_ms": {
+            "p50": 0.13424,
+            "p95": 2.102217,
+            "p99": 3.293236,
+            "mean": 0.496287,
+            "max": 3.966266
+          },
+          "throughput_ops_s_range": [
+            2009.604220104555,
+            2009.604220104555
+          ]
+        },
+        "update@c2": {
+          "repetitions": 1,
+          "operations": 200,
+          "items": 200,
+          "concurrency": 2,
+          "wall_seconds": 0.535453312,
+          "throughput_ops_s": 373.51529165627795,
+          "throughput_items_s": 373.51529165627795,
+          "latency_ms": {
+            "p50": 4.4874,
+            "p95": 10.755449,
+            "p99": 13.698329,
+            "mean": 5.33908,
+            "max": 14.960444
+          },
+          "throughput_ops_s_range": [
+            373.51529165627795,
+            373.51529165627795
+          ]
+        },
+        "mixed@c2": {
+          "repetitions": 1,
+          "operations": 300,
+          "items": 300,
+          "concurrency": 2,
+          "wall_seconds": 0.178458819,
+          "throughput_ops_s": 1681.0600993610744,
+          "throughput_items_s": 1681.0600993610744,
+          "latency_ms": {
+            "p50": 0.168435,
+            "p95": 6.539303,
+            "p99": 8.338082,
+            "mean": 1.167149,
+            "max": 11.774041
+          },
+          "throughput_ops_s_range": [
+            1681.0600993610744,
+            1681.0600993610744
+          ]
+        },
+        "delete": {
+          "repetitions": 1,
+          "operations": 10,
+          "items": 1000,
+          "concurrency": 1,
+          "wall_seconds": 0.194154434,
+          "throughput_ops_s": 51.505390806578234,
+          "throughput_items_s": 5150.539080657823,
+          "latency_ms": {
+            "p50": 19.247111,
+            "p95": 23.886775,
+            "p99": 25.50409,
+            "mean": 19.415443,
+            "max": 25.908419
+          },
+          "throughput_ops_s_range": [
+            51.505390806578234,
+            51.505390806578234
+          ]
+        }
+      },
+      "disk_after_ingest_allocated_bytes": 212238336,
+      "disk_after_deletes_allocated_bytes": 213364736,
+      "peak_rss_bytes": 213532672,
+      "peak_pss_bytes": 213520384,
+      "cgroup_memory_peak_bytes": 630775808
+    },
+    "postgresql": {
+      "successful_runs": 1,
+      "phases": {
+        "ingest": {
+          "repetitions": 1,
+          "operations": 20,
+          "items": 2000,
+          "concurrency": 1,
+          "wall_seconds": 0.28994774,
+          "throughput_ops_s": 68.97794754323658,
+          "throughput_items_s": 6897.794754323658,
+          "latency_ms": {
+            "p50": 13.585031,
+            "p95": 17.117241,
+            "p99": 17.125888,
+            "mean": 14.497387,
+            "max": 17.12805
+          },
+          "throughput_ops_s_range": [
+            68.97794754323658,
+            68.97794754323658
+          ]
+        },
+        "point_read@c1": {
+          "repetitions": 1,
+          "operations": 300,
+          "items": 300,
+          "concurrency": 1,
+          "wall_seconds": 0.03009326,
+          "throughput_ops_s": 9969.009671933183,
+          "throughput_items_s": 9969.009671933183,
+          "latency_ms": {
+            "p50": 0.079163,
+            "p95": 0.184717,
+            "p99": 0.231703,
+            "mean": 0.09936,
+            "max": 0.567272
+          },
+          "throughput_ops_s_range": [
+            9969.009671933183,
+            9969.009671933183
+          ]
+        },
+        "query_eq@c1": {
+          "repetitions": 1,
+          "operations": 100,
+          "items": 100,
+          "concurrency": 1,
+          "wall_seconds": 0.025898427,
+          "throughput_ops_s": 3861.23836787462,
+          "throughput_items_s": 3861.23836787462,
+          "latency_ms": {
+            "p50": 0.225972,
+            "p95": 0.406192,
+            "p99": 0.472685,
+            "mean": 0.257998,
+            "max": 0.544784
+          },
+          "throughput_ops_s_range": [
+            3861.23836787462,
+            3861.23836787462
+          ]
+        },
+        "query_range@c1": {
+          "repetitions": 1,
+          "operations": 100,
+          "items": 100,
+          "concurrency": 1,
+          "wall_seconds": 0.020196514,
+          "throughput_ops_s": 4951.349524972478,
+          "throughput_items_s": 4951.349524972478,
+          "latency_ms": {
+            "p50": 0.177075,
+            "p95": 0.355988,
+            "p99": 0.407972,
+            "mean": 0.201378,
+            "max": 0.415913
+          },
+          "throughput_ops_s_range": [
+            4951.349524972478,
+            4951.349524972478
+          ]
+        },
+        "text@c1": {
+          "repetitions": 1,
+          "operations": 100,
+          "items": 100,
+          "concurrency": 1,
+          "wall_seconds": 1.396835481,
+          "throughput_ops_s": 71.59039225464805,
+          "throughput_items_s": 71.59039225464805,
+          "latency_ms": {
+            "p50": 13.603036,
+            "p95": 20.071203,
+            "p99": 23.37536,
+            "mean": 13.961025,
+            "max": 24.618683
+          },
+          "throughput_ops_s_range": [
+            71.59039225464805,
+            71.59039225464805
+          ]
+        },
+        "point_read@c2": {
+          "repetitions": 1,
+          "operations": 300,
+          "items": 300,
+          "concurrency": 2,
+          "wall_seconds": 0.029635417,
+          "throughput_ops_s": 10123.02273323841,
+          "throughput_items_s": 10123.02273323841,
+          "latency_ms": {
+            "p50": 0.139456,
+            "p95": 0.426616,
+            "p99": 0.664551,
+            "mean": 0.194161,
+            "max": 0.946067
+          },
+          "throughput_ops_s_range": [
+            10123.02273323841,
+            10123.02273323841
+          ]
+        },
+        "query_eq@c2": {
+          "repetitions": 1,
+          "operations": 100,
+          "items": 100,
+          "concurrency": 2,
+          "wall_seconds": 0.019576999,
+          "throughput_ops_s": 5108.035199879205,
+          "throughput_items_s": 5108.035199879205,
+          "latency_ms": {
+            "p50": 0.325456,
+            "p95": 0.718123,
+            "p99": 0.785428,
+            "mean": 0.377437,
+            "max": 0.798625
+          },
+          "throughput_ops_s_range": [
+            5108.035199879205,
+            5108.035199879205
+          ]
+        },
+        "query_range@c2": {
+          "repetitions": 1,
+          "operations": 100,
+          "items": 100,
+          "concurrency": 2,
+          "wall_seconds": 0.018126294,
+          "throughput_ops_s": 5516.847514445038,
+          "throughput_items_s": 5516.847514445038,
+          "latency_ms": {
+            "p50": 0.270024,
+            "p95": 0.751794,
+            "p99": 0.996857,
+            "mean": 0.342759,
+            "max": 1.044462
+          },
+          "throughput_ops_s_range": [
+            5516.847514445038,
+            5516.847514445038
+          ]
+        },
+        "text@c2": {
+          "repetitions": 1,
+          "operations": 100,
+          "items": 100,
+          "concurrency": 2,
+          "wall_seconds": 0.914473922,
+          "throughput_ops_s": 109.3524895508174,
+          "throughput_items_s": 109.3524895508174,
+          "latency_ms": {
+            "p50": 17.071978,
+            "p95": 30.6455,
+            "p99": 34.271304,
+            "mean": 18.095972,
+            "max": 37.99071
+          },
+          "throughput_ops_s_range": [
+            109.3524895508174,
+            109.3524895508174
+          ]
+        },
+        "aggregate": {
+          "repetitions": 1,
+          "operations": 5,
+          "items": 5,
+          "concurrency": 1,
+          "wall_seconds": 0.01454344,
+          "throughput_ops_s": 343.79761596981183,
+          "throughput_items_s": 343.79761596981183,
+          "latency_ms": {
+            "p50": 2.079996,
+            "p95": 4.300297,
+            "p99": 4.321738,
+            "mean": 2.905698,
+            "max": 4.327098
+          },
+          "throughput_ops_s_range": [
+            343.79761596981183,
+            343.79761596981183
+          ]
+        },
+        "update@c1": {
+          "repetitions": 1,
+          "operations": 200,
+          "items": 200,
+          "concurrency": 1,
+          "wall_seconds": 0.840535732,
+          "throughput_ops_s": 237.94348340684226,
+          "throughput_items_s": 237.94348340684226,
+          "latency_ms": {
+            "p50": 4.054888,
+            "p95": 6.501479,
+            "p99": 7.057221,
+            "mean": 4.194143,
+            "max": 7.257921
+          },
+          "throughput_ops_s_range": [
+            237.94348340684226,
+            237.94348340684226
+          ]
+        },
+        "mixed@c1": {
+          "repetitions": 1,
+          "operations": 300,
+          "items": 300,
+          "concurrency": 1,
+          "wall_seconds": 0.213460517,
+          "throughput_ops_s": 1405.4121306189847,
+          "throughput_items_s": 1405.4121306189847,
+          "latency_ms": {
+            "p50": 0.107133,
+            "p95": 3.621376,
+            "p99": 4.577548,
+            "mean": 0.70972,
+            "max": 5.101166
+          },
+          "throughput_ops_s_range": [
+            1405.4121306189847,
+            1405.4121306189847
+          ]
+        },
+        "update@c2": {
+          "repetitions": 1,
+          "operations": 200,
+          "items": 200,
+          "concurrency": 2,
+          "wall_seconds": 0.577340686,
+          "throughput_ops_s": 346.4159115229929,
+          "throughput_items_s": 346.4159115229929,
+          "latency_ms": {
+            "p50": 5.659133,
+            "p95": 7.511481,
+            "p99": 8.426689,
+            "mean": 5.745924,
+            "max": 8.543842
+          },
+          "throughput_ops_s_range": [
+            346.4159115229929,
+            346.4159115229929
+          ]
+        },
+        "mixed@c2": {
+          "repetitions": 1,
+          "operations": 300,
+          "items": 300,
+          "concurrency": 2,
+          "wall_seconds": 0.172359982,
+          "throughput_ops_s": 1740.5432312008481,
+          "throughput_items_s": 1740.5432312008481,
+          "latency_ms": {
+            "p50": 0.162867,
+            "p95": 6.046481,
+            "p99": 7.208073,
+            "mean": 1.08474,
+            "max": 8.266567
+          },
+          "throughput_ops_s_range": [
+            1740.5432312008481,
+            1740.5432312008481
+          ]
+        },
+        "delete": {
+          "repetitions": 1,
+          "operations": 10,
+          "items": 1000,
+          "concurrency": 1,
+          "wall_seconds": 0.03851547,
+          "throughput_ops_s": 259.6359333016058,
+          "throughput_items_s": 25963.59333016058,
+          "latency_ms": {
+            "p50": 3.618076,
+            "p95": 5.374556,
+            "p99": 5.44687,
+            "mean": 3.851547,
+            "max": 5.464949
+          },
+          "throughput_ops_s_range": [
+            259.6359333016058,
+            259.6359333016058
+          ]
+        }
+      },
+      "disk_after_ingest_allocated_bytes": 68616192,
+      "disk_after_deletes_allocated_bytes": 69320704,
+      "peak_rss_bytes": 192155648,
+      "peak_pss_bytes": 59337728,
+      "cgroup_memory_peak_bytes": 186531840
+    }
+  },
+  "excluded_workloads": [],
+  "caveats": [
+    "Results describe only this workload, dataset, machine and configuration; they are not a general ranking of the engines.",
+    "Transport differs: YamoraDB is measured over HTTP/1.1 with JSON request envelopes and a new TCP connection per request (its Python client's behavior); MongoDB uses its binary OP_MSG wire protocol and PostgreSQL its frontend/backend protocol, each over one persistent connection per client process. Yamora's TLS-only binary listener was not used.",
+    "Client implementations differ: YamoraDB uses its pure-Python standard-library client, MongoDB a pure-Python OP_MSG/BSON client written for this harness (not the official driver; no C-accelerated BSON), and PostgreSQL psycopg2, a C extension over libpq.",
+    "Point reads return different representations: YamoraDB returns exact YAML bytes without parsing them; MongoDB and PostgreSQL clients decode BSON or JSONB into Python objects.",
+    "Caches were set to 256 MiB each but cover different things: Yamora's tree-page cache excludes records, WiredTiger's cache holds uncompressed pages, and PostgreSQL's shared_buffers double-buffers with the OS page cache. All three also use the OS page cache charged to their 1 GiB container memory limit.",
+    "Durability was matched as closely as each engine allows: Yamora synchronizes every commit twice (records, then superblock); MongoDB waits for its journal (w:1, j:true); PostgreSQL waits for its WAL flush (synchronous_commit=on). The mechanisms and the number of synchronizations per commit differ.",
+    "Text search compares single-term lookups returning any 20 matches. Ordering and scoring differ (Yamora: document-ID order, matched-term count; MongoDB: unspecified order without a score sort; PostgreSQL: unspecified order); no relevance ranking is compared. Stemming and stop words are disabled on all three (Yamora has none, MongoDB default_language none, PostgreSQL the simple configuration).",
+    "PostgreSQL runs ANALYZE once after the bulk load (standard practice); the other engines have no equivalent step. Disk sizes are measured after an explicit checkpoint (MongoDB fsync, PostgreSQL CHECKPOINT; Yamora needs none) and without compaction, VACUUM FULL or MongoDB compact, so space freed by deletes is generally not returned.",
+    "On-disk size is st_blocks-allocated bytes of each data directory, including journals, WAL and diagnostics. Filesystem compression or copy-on-write (for example btrfs) can make physical usage differ from these figures; MongoDB also compresses blocks (snappy) by default while Yamora and PostgreSQL (below the TOAST threshold) do not.",
+    "Peak memory is sampled every 0.25 s: summed RSS counts shared memory once per process (overstating multi-process PostgreSQL), summed PSS divides it, and cgroup memory.peak includes page cache charged to the container.",
+    "YamoraDB additionally guarantees exact YAML source preservation: raw reads return the stored bytes, comments and formatting included, and the harness verifies this. MongoDB and PostgreSQL store parsed values and do not keep the source text.",
+    "YamoraDB lacks capabilities the others have, including a production-qualified replication/HA profile (its replica-set profile is experimental), relevance-ranked text search with stemming or phrases, and persistent connections in its Python client; this workload measures none of those capabilities.",
+    "All engines ran in Podman with --cpus 2 and --memory/--memory-swap 1g on one private network, published only on 127.0.0.1, on the same filesystem; the benchmark client processes ran on the host without CPU limits. Engines ran one at a time, never concurrently, in an order rotated per repetition."
+  ],
+  "teardown": {
+    "containers_remaining": [],
+    "networks_remaining": [],
+    "work_directory_removed": true
+  }
+}
