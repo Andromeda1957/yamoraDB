@@ -22,8 +22,8 @@ yamldbctl = "yamora.yamoractl:main"
 
 [tool.setuptools]
 packages = ["yamora", "yamldb"]
-package-dir = {yamora = "yamora", yamldb = "yamora/compat"}
+package-dir = {yamora = ".", yamldb = "compat"}
 include-package-data = false
 
 [tool.setuptools.data-files]
-"share/doc/yamora/examples" = ["yamora/drivers/python/examples/crud_tls.py"]
+"share/doc/yamora/examples" = ["drivers/python/examples/crud_tls.py"]
