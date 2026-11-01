@@ -37,7 +37,7 @@ def build(root, output):
     selected = inputs(root)
     version = (root / "VERSION").read_text().strip()
     module = (root / "go.mod").read_text().splitlines()[0].removeprefix("module ")
-    if version != "0.1.0" or module != "github.com/Andromeda1957/yamldb/yamora/drivers/go":
+    if version != "0.1.0" or module != "github.com/Andromeda1957/yamoraDB/yamora/drivers/go":
         raise ValueError("unsupported local Go package identity")
     output.mkdir(parents=True, exist_ok=True)
     escaped = "".join("!" + c.lower() if c.isupper() else c for c in module)

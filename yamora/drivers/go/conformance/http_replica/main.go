@@ -23,7 +23,7 @@ import (
 	"time"
 	"unicode/utf8"
 
-	y "github.com/Andromeda1957/yamldb/yamora/drivers/go"
+	y "github.com/Andromeda1957/yamoraDB/yamora/drivers/go"
 )
 
 const lineLimit = 16384

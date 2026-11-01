@@ -10,7 +10,7 @@ import (
 	"strings"
 	"testing"
 
-	y "github.com/Andromeda1957/yamldb/yamora/drivers/go"
+	y "github.com/Andromeda1957/yamoraDB/yamora/drivers/go"
 )
 
 func operationPeer(t *testing.T, answer func(net.Conn, map[int][]byte, []byte) error, minimum ...byte) *y.BinaryClient {

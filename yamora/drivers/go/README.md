@@ -6,12 +6,12 @@ The C daemon requires no Go runtime or additional library. Go 1.23 or newer is
 required; CI pins Go 1.27.3.
 
 The module path is
-`github.com/Andromeda1957/yamldb/yamora/drivers/go`. This branch has no published
+`github.com/Andromeda1957/yamoraDB/yamora/drivers/go`. This branch has no published
 driver release. An application can use a local checkout while evaluating it:
 
 ```sh
-go mod edit -require=github.com/Andromeda1957/yamldb/yamora/drivers/go@v0.0.0
-go mod edit -replace=github.com/Andromeda1957/yamldb/yamora/drivers/go=/absolute/path/to/yamora/drivers/go
+go mod edit -require=github.com/Andromeda1957/yamoraDB/yamora/drivers/go@v0.0.0
+go mod edit -replace=github.com/Andromeda1957/yamoraDB/yamora/drivers/go=/absolute/path/to/yamora/drivers/go
 ```
 
 Provide private read/write credentials from the application's secret store:
@@ -21,7 +21,7 @@ import (
     "context"
     "net/netip"
 
-    yamora "github.com/Andromeda1957/yamldb/yamora/drivers/go"
+    yamora "github.com/Andromeda1957/yamoraDB/yamora/drivers/go"
 )
 
 client, err := yamora.New(yamora.Config{

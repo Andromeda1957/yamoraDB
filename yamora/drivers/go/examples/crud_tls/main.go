@@ -14,7 +14,7 @@ import (
 	"strings"
 	"time"
 
-	yamora "github.com/Andromeda1957/yamldb/yamora/drivers/go"
+	yamora "github.com/Andromeda1957/yamoraDB/yamora/drivers/go"
 )
 
 func run() error {

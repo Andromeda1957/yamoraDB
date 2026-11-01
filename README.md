@@ -2,7 +2,7 @@
 
 YamoraDB is a native document database written in C17, with binary disk storage,
 a YAML interface, and source-preserving document updates. This repository was
-previously named YamlDB; its existing URL and history are retained.
+previously named YamlDB; its Git history is retained.
 
 This is a public source extract of YamoraDB. It includes the database engine,
 Python client and administration tools, language drivers, documentation, examples,
@@ -31,8 +31,8 @@ Linux is the verified build target. Install a C17 compiler, Make, pkg-config,
 LibYAML 0.2.5 or newer, and OpenSSL 3 or newer, including development headers.
 
 ```sh
-git clone https://github.com/Andromeda1957/yamldb.git
-cd yamldb
+git clone https://github.com/Andromeda1957/yamoraDB.git
+cd yamoraDB
 make
 ```
 

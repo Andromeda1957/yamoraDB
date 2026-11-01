@@ -13,7 +13,7 @@ import (
 	"testing"
 	"time"
 
-	y "github.com/Andromeda1957/yamldb/yamora/drivers/go"
+	y "github.com/Andromeda1957/yamoraDB/yamora/drivers/go"
 )
 
 func TestBinaryNativeMTLSCRUDHTTPInterop(t *testing.T) {

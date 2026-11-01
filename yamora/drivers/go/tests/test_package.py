@@ -17,7 +17,7 @@ from yamora.drivers.python.tests.package_support import example_arguments
 from yamora.drivers.python.tests.package_support import native
 
 ROOT = Path(__file__).resolve().parents[1]
-MODULE = "github.com/Andromeda1957/yamldb/yamora/drivers/go"
+MODULE = "github.com/Andromeda1957/yamoraDB/yamora/drivers/go"
 FILES = {
     "LICENSE",
     "README.md",

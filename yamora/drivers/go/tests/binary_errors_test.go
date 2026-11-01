@@ -7,7 +7,7 @@ import (
 	"sync/atomic"
 	"testing"
 
-	y "github.com/Andromeda1957/yamldb/yamora/drivers/go"
+	y "github.com/Andromeda1957/yamoraDB/yamora/drivers/go"
 )
 
 func TestBinaryPublicFailureClassification(t *testing.T) {

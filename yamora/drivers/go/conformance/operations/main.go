@@ -17,7 +17,7 @@ import (
 	"syscall"
 	"time"
 
-	yamora "github.com/Andromeda1957/yamldb/yamora/drivers/go"
+	yamora "github.com/Andromeda1957/yamoraDB/yamora/drivers/go"
 )
 
 var required = []string{"host", "port", "server-name", "ca-file", "cert-file", "key-file", "method", "target", "content-type", "feed", "source-file", "request-id", "timeout-ms", "max-frame-bytes", "cancel-mode", "output-dir"}
