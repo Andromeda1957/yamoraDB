@@ -36,9 +36,9 @@ HTTP; full binary transport and shared conformance remain in progress.
 The engine provides:
 
 - YAML scalars, maps, and arrays alongside exact raw-source retrieval;
-- MongoDB-style filters with array-of-map dot paths, `$all`, `$size`, `$type`,
-  and linear-time `$regex`, plus projection, stable sorting, pagination, count,
-  and explain;
+- Filters for nested fields and arrays, including `$all`, `$size`, `$type`,
+  and linear-time `$regex`, plus projection, stable sorting, pagination, counts,
+  and query explanations;
 - native streaming [group, bucket, count, and facet aggregation](docs/aggregation.md),
   with index-backed input and opt-in encrypted disk spill;
 - field, compound, unique, and scalar-array multikey indexes;
@@ -282,8 +282,7 @@ The compatible YAML-directory and version-1 `.ymdb` backends retain their old
 in-memory limits: 256 collections, 50,000 documents, 256 MiB combined source/gzip,
 256 MiB parsed models, and 256 KiB query output. They rebuild indexes for a whole
 candidate snapshot. `--init-binary` still creates that version-1 backend;
-`--init-disk` selects the paged engine. No capacity/performance parity with
-MongoDB is implied by these format bounds or correctness tests.
+`--init-disk` selects the paged engine.
 
 ## Backups and replication
 
